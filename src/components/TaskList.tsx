@@ -1,21 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { FiTrash, FiCheckSquare } from 'react-icons/fi'
+import Cookies from 'js-cookie'
+
+import { Task } from '../types/TaskType';
 
 import '../styles/tasklist.scss'
 
-import { FiTrash, FiCheckSquare } from 'react-icons/fi'
-
-interface Task {
-  id: string;
-  title: string;
-  isComplete: boolean;
+interface TaskListProps {
+  cookieTasks: Task[];
 }
 
-export function TaskList() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+export function TaskList({ cookieTasks }: TaskListProps) {
+  const [tasks, setTasks] = useState<Task[]>(cookieTasks);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
+  useEffect(() => {
+    setTasks(cookieTasks);
+  }, [cookieTasks])
+
   function handleCreateNewTask() {
-    // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
     if (!newTaskTitle) return;
     const task: Task = {
       id: '_' + Math.random().toString(36).substr(2, 9),
@@ -23,10 +26,11 @@ export function TaskList() {
       isComplete: false
     }
     setTasks([...tasks, task]);
+    Cookies.set('tasks', JSON.stringify([...tasks, task]));
+    setNewTaskTitle('');
   }
 
   function handleToggleTaskCompletion(id: string) {
-    // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
     const oldTask: Task = tasks.find(task => task.id == id) as Task;
 
     const editedTask = {
@@ -37,12 +41,13 @@ export function TaskList() {
     const newTasks: Task[] = tasks.filter(task => task.id !== id);
 
     setTasks([...newTasks, editedTask])
+    Cookies.set('tasks', JSON.stringify([...newTasks, editedTask]));
   }
 
   function handleRemoveTask(id: string) {
-    // Remova uma task da listagem pelo ID
     const newTasks: Task[] = tasks.filter(task => task.id !== id);
     setTasks(newTasks);
+    Cookies.set('tasks', JSON.stringify(newTasks));
   }
 
   return (
