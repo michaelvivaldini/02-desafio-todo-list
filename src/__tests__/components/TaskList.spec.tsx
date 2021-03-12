@@ -4,7 +4,7 @@ import { TaskList } from '../../components/TaskList';
 
 describe('App Page', () => {
   it('should be able to add a task', async () => {
-    render(<TaskList />);
+    render(<TaskList cookieTasks={[]} />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
@@ -39,7 +39,7 @@ describe('App Page', () => {
   })
 
   it('should not be able to add a task with a empty title', () => {
-    render(<TaskList />);
+    render(<TaskList cookieTasks={[]} />);
 
     const addTaskButton = screen.getByTestId('add-task-button');
 
@@ -54,7 +54,7 @@ describe('App Page', () => {
         value: 'Desafio ReactJS Ignite'
       }
     });
-    
+
     fireEvent.click(addTaskButton);
 
     const addedFirstTaskTitle = screen.getByText('Desafio ReactJS Ignite');
@@ -63,7 +63,7 @@ describe('App Page', () => {
   })
 
   it('should be able to remove a task', async () => {
-    render(<TaskList />);
+    render(<TaskList cookieTasks={[]} />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
@@ -97,7 +97,7 @@ describe('App Page', () => {
   })
 
   it('should be able to check a task', () => {
-    render(<TaskList />);
+    render(<TaskList cookieTasks={[]} />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
