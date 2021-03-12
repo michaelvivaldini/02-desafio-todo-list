@@ -10,7 +10,7 @@ export function App() {
 
   useEffect(() => {
     const tasks = Cookies.get('tasks');
-    if (tasks) setCookieTasks(JSON.parse(Cookies.get('tasks')) || []);
+    if (tasks) setCookieTasks(JSON.parse(Cookies.get('tasks') as string) || []);
   }, [])
 
   return (
