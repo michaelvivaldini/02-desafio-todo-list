@@ -7,15 +7,15 @@ import { Task } from '../types/TaskType';
 import '../styles/tasklist.scss'
 
 interface TaskListProps {
-  cookieTasks: Task[];
+  cookieTasks?: Task[];
 }
 
 export function TaskList({ cookieTasks }: TaskListProps) {
-  const [tasks, setTasks] = useState<Task[]>(cookieTasks);
+  const [tasks, setTasks] = useState<Task[]>(cookieTasks || []);
   const [newTaskTitle, setNewTaskTitle] = useState('');
 
   useEffect(() => {
-    setTasks(cookieTasks);
+    setTasks(cookieTasks || []);
   }, [cookieTasks])
 
   function handleCreateNewTask() {

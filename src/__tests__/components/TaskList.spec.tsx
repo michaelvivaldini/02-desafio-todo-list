@@ -4,7 +4,7 @@ import { TaskList } from '../../components/TaskList';
 
 describe('App Page', () => {
   it('should be able to add a task', async () => {
-    render(<TaskList cookieTasks={[]} />);
+    render(<TaskList />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
@@ -39,7 +39,7 @@ describe('App Page', () => {
   })
 
   it('should not be able to add a task with a empty title', () => {
-    render(<TaskList cookieTasks={[]} />);
+    render(<TaskList />);
 
     const addTaskButton = screen.getByTestId('add-task-button');
 
@@ -63,7 +63,7 @@ describe('App Page', () => {
   })
 
   it('should be able to remove a task', async () => {
-    render(<TaskList cookieTasks={[]} />);
+    render(<TaskList />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
@@ -97,7 +97,7 @@ describe('App Page', () => {
   })
 
   it('should be able to check a task', () => {
-    render(<TaskList cookieTasks={[]} />);
+    render(<TaskList />);
 
     const taskInput = screen.getByPlaceholderText('Adicionar novo todo');
     const addTaskButton = screen.getByTestId('add-task-button');
